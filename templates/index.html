@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Evidence Vault</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.12), transparent 30%),
+                linear-gradient(135deg, #0b1120, #111827, #0f172a);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: 40px auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 35px 25px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.30);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            margin-bottom: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero p {
+            max-width: 760px;
+            margin: 0 auto;
+            color: #dbeafe;
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        .user-box {
+            margin-top: 18px;
+            color: #bfdbfe;
+            font-size: 15px;
+        }
+
+        .top-links {
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .top-links a {
+            color: #93c5fd;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .hero-badges {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.08);
+            color: #bfdbfe;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            padding: 10px 16px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 22px;
+            margin-bottom: 22px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(10px);
+        }
+
+        .card h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #dbeafe;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .steps {
+            display: grid;
+            gap: 14px;
+            margin-top: 15px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .step-number {
+            min-width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.25);
+        }
+
+        .step-text {
+            color: #e5f0ff;
+            font-size: 15px;
+        }
+
+        .form-box {
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .form-box label {
+            display: block;
+            margin-bottom: 10px;
+            color: #bfdbfe;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            border: none;
+            background: #f8fafc;
+            color: #0f172a;
+            margin-bottom: 14px;
+            font-size: 15px;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        button {
+            border: none;
+            border-radius: 14px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            box-shadow: 0 10px 24px rgba(34, 197, 94, 0.25);
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(34, 197, 94, 0.35);
+        }
+
+        .check-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            box-shadow: 0 10px 24px rgba(59, 130, 246, 0.25);
+        }
+
+        .check-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(59, 130, 246, 0.35);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .feature {
+            background: rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .feature h3 {
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .feature p {
+            margin: 0;
+            font-size: 14px;
+            color: #cbd5e1;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 18px;
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .success-title {
+            color: #86efac;
+            margin-bottom: 14px;
+            font-size: 20px;
+        }
+
+        .result-box p {
+            margin-bottom: 10px;
+        }
+
+        .hash-box {
+            margin-top: 10px;
+            background: #020617;
+            border: 1px solid rgba(96, 165, 250, 0.25);
+            border-radius: 14px;
+            padding: 14px;
+            color: #93c5fd;
+            word-break: break-all;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .integrity-list {
+            margin-top: 18px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .integrity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 16px 18px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .file-name {
+            font-weight: bold;
+            color: #f8fafc;
+        }
+
+        .status {
+            padding: 10px 16px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .valid {
+            color: #86efac;
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            background: rgba(34, 197, 94, 0.12);
+        }
+
+        .tampered {
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            background: rgba(239, 68, 68, 0.12);
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #94a3b8;
+            margin-top: 25px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 900px) {
+            .grid,
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .card h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="hero">
+        <h1>Secure Evidence Vault 🔐</h1>
+        <p>
+            A secure system for storing digital evidence safely using encryption and
+            SHA-256 integrity verification to detect any tampering.
+        </p>
+
+        <div class="user-box">
+            <strong>User:</strong> {{ username }} |
+            <strong>Role:</strong> {{ role }}
+        </div>
+
+        <div class="top-links">
+            <a href="/logout">Logout</a>
+            {% if role == "Admin" %}
+                <a href="/logs">View Logs</a>
+            {% endif %}
+        </div>
+
+        <div class="hero-badges">
+            <div class="badge">Encryption</div>
+            <div class="badge">SHA-256</div>
+            <div class="badge">Integrity Check</div>
+            <div class="badge">Tampering Detection</div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h2>Upload & Protect Evidence</h2>
+            <p>
+                Upload any digital evidence file. The system will generate a SHA-256 hash,
+                encrypt the file, and store it securely.
+            </p>
+
+            <div class="form-box">
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="action" value="upload">
+
+                    <label>Select Evidence File</label>
+                    <input type="file" name="file" required>
+
+                    <div class="btn-row">
+                        <button type="submit" class="upload-btn">Upload & Encrypt</button>
+                    </div>
+                </form>
+            </div>
+
+            {% if message %}
+            <div class="result-box">
+                <div class="success-title">{{ message }}</div>
+                <p><strong>Original filename:</strong> {{ filename }}</p>
+                <p><strong>Encrypted filename:</strong> {{ encrypted_filename }}</p>
+                <p><strong>SHA-256 Fingerprint:</strong></p>
+                <div class="hash-box">{{ hash_value }}</div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="card">
+            <h2>How the System Works</h2>
+            <p>
+                The project protects evidence in two important ways:
+                confidentiality and integrity.
+            </p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Upload the original evidence file</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Generate a unique SHA-256 digital fingerprint</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Encrypt the file before storing it</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-text">Later verify if the evidence is still unchanged</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Security Goals</h2>
+        <div class="features">
+            <div class="feature">
+                <h3>🔒 Confidentiality</h3>
+                <p>The file is encrypted, so it cannot be read directly.</p>
+            </div>
+
+            <div class="feature">
+                <h3>🧬 Integrity</h3>
+                <p>SHA-256 makes a unique fingerprint for the file.</p>
+            </div>
+
+            <div class="feature">
+                <h3>🚨 Tampering Detection</h3>
+                <p>If the file changes, the hash changes, and the system detects it.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Check Evidence Integrity</h2>
+        <p>
+            Click the button below to verify whether the stored evidence is still valid
+            or has been tampered with.
+        </p>
+
+        <form method="POST">
+            <input type="hidden" name="action" value="check">
+            <div class="btn-row">
+                <button type="submit" class="check-btn">Check Integrity</button>
+            </div>
+        </form>
+
+        {% if results %}
+        <div class="integrity-list">
+            {% for filename, status in results %}
+            <div class="integrity-item">
+                <div class="file-name">{{ filename }}</div>
+
+                {% if "Valid" in status %}
+                    <div class="status valid">{{ status }}</div>
+                {% else %}
+                    <div class="status tampered">{{ status }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="footer-note">
+        This project demonstrates secure storage of digital evidence using
+        encryption for confidentiality and SHA-256 for integrity verification.
+    </div>
+
+</div>
+
+</body>
+</html>

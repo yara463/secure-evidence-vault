@@ -1,0 +1,14 @@
+[2026-05-08 16:50:20] User admin logged in as Admin
+[2026-05-08 16:50:29] User admin uploaded file Screenshot 2026-04-13 103455.png
+[2026-05-08 16:50:40] User admin checked evidence integrity
+[2026-05-08 16:51:00] User admin checked evidence integrity
+[2026-05-08 16:53:34] User admin uploaded file Screenshot 2026-04-13 103455.png
+[2026-05-13 23:22:46] User admin logged in as Admin
+[2026-05-13 23:24:04] User investigator logged in as Investigator
+[2026-05-14 00:14:00] User investigator logged out
+[2026-05-14 00:14:02] User admin logged in as Admin
+[2026-05-14 00:15:08] User admin logged out
+[2026-05-14 00:15:24] User investigator logged in as Investigator
+[2026-05-14 00:24:10] User investigator logged in as Investigator
+[2026-05-14 00:24:12] User investigator logged out
+[2026-05-14 00:24:40] User admin logged in as Admin
